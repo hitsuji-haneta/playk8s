@@ -16,6 +16,7 @@ func main() {
 
 	router.GET("/:name", func(ctx *gin.Context) {
 		name := ctx.Param("name")
+		// ctx.String(http.StatusOK, "Hello, "+name+"!")
 		ctx.HTML(http.StatusOK, "index.html", gin.H{"name": name})
 	})
 
