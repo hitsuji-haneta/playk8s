@@ -1,7 +1,9 @@
 package main
 
 import (
+	"io/ioutil"
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
@@ -16,8 +18,17 @@ func main() {
 
 	router.GET("/:name", func(ctx *gin.Context) {
 		name := ctx.Param("name")
-		// ctx.String(http.StatusOK, "Hello, "+name+"!")
-		ctx.HTML(http.StatusOK, "index.html", gin.H{"name": name})
+		f, err := os.Open("secret/prikey.txt")
+		var prikey string
+		if err == nil {
+			b, _ := ioutil.ReadAll(f)
+			prikey = string(b)
+		} else {
+			prikey = ""
+		}
+		defer f.Close()
+
+		ctx.HTML(http.StatusOK, "index.html", gin.H{"name": name, "prikey": prikey})
 	})
 
 	router.POST("/", func(ctx *gin.Context) {
