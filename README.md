@@ -1,6 +1,6 @@
 ### Decrypt the secrets
 ```
-kubesec decrypt -i manifests/secret.yml
+kubesec decrypt -i manifests/encrypted-secret.yml -o manifests/secret.yml
 ```
 
 ### apply
