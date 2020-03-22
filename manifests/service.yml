@@ -6,8 +6,7 @@ metadata:
     app: playk8s
 spec:
   selector:
-    app: playk8s-app
-  type:  NodePort
+    app: playk8s
   ports:
   - name:  http
     port:  80

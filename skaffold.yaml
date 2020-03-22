@@ -1,0 +1,10 @@
+apiVersion: skaffold/v2alpha4
+kind: Config
+metadata:
+  name: playk-s
+build:
+  artifacts:
+  - image: gcr.io/hitsuji-haneta/playk8s
+deploy:
+  kustomize:
+    paths: ["./manifests/"]
