@@ -1,6 +1,8 @@
 resources:
   - deployment.yml
+  - deployment-sub.yml
   - service.yml
+  - service-sub.yml
   - ingress.yml
   - persistent-volume.yml
   - secret.yml

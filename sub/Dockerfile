@@ -6,6 +6,5 @@ RUN go build -o /main /app/main.go
 FROM alpine:3.10
 EXPOSE 8080
 WORKDIR /app
-RUN mkdir templates
 COPY --from=builder /main .
 CMD [ "./main" ]

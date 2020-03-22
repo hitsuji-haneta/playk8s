@@ -6,6 +6,8 @@ build:
   artifacts:
   - image: gcr.io/hitsuji-haneta/playk8s/main
     context: ./main
+  - image: gcr.io/hitsuji-haneta/playk8s/sub
+    context: ./sub
   local:
     useBuildkit: true
 deploy:

@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	log.Println("start sub")
+	log.Println("sub: start")
 
 	router := gin.Default()
 	router.GET("/", func(ctx *gin.Context) {

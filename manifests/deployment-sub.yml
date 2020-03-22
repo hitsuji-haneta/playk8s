@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: playk8s-sub-deployment
+  labels:
+    app: playk8s-sub
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: playk8s-sub
+  template:
+    metadata:
+      labels:
+        app: playk8s-sub
+    spec:
+      containers:
+      - name: playk8s-sub-container
+        image: gcr.io/hitsuji-haneta/playk8s/sub:latest
+        ports:
+        - containerPort: 8080

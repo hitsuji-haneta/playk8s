@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	log.Println("start!")
+	log.Println("main: start!")
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*.html")
 
@@ -18,7 +18,7 @@ func main() {
 		ctx.String(http.StatusOK, "Send your name as /:name")
 	})
 
-	router.GET("/:name", func(ctx *gin.Context) {
+	router.GET("/name/:name", func(ctx *gin.Context) {
 		name := ctx.Param("name")
 		f, err := os.Open("secret/prikey.txt")
 		var prikey string
@@ -31,6 +31,23 @@ func main() {
 		defer f.Close()
 
 		ctx.HTML(http.StatusOK, "index.html", gin.H{"name": name, "prikey": prikey})
+	})
+
+	router.GET("/push", func(ctx *gin.Context) {
+		log.Println("main: push")
+
+		url := "http://playk8s-sub-service:8080"
+		resp, err := http.Get(url)
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer resp.Body.Close()
+
+		byteArray, err := ioutil.ReadAll(resp.Body)
+		if err != nil {
+			log.Fatal(err)
+		}
+		ctx.String(http.StatusOK, string(byteArray))
 	})
 
 	router.POST("/", func(ctx *gin.Context) {
