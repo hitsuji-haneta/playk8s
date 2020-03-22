@@ -2,6 +2,7 @@ package main
 
 import (
 	"io/ioutil"
+	"log"
 	"net/http"
 	"os"
 
@@ -9,6 +10,7 @@ import (
 )
 
 func main() {
+	log.Println("start!")
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*.html")
 

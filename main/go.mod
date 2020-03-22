@@ -1,4 +1,4 @@
-module thinkshake.net/playk8s
+module github.com/hitsuji-haneta/playk8s/main
 
 go 1.13
 

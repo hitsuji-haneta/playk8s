@@ -4,7 +4,10 @@ metadata:
   name: playk-s
 build:
   artifacts:
-  - image: gcr.io/hitsuji-haneta/playk8s
+  - image: gcr.io/hitsuji-haneta/playk8s/main
+    context: ./main
+  local:
+    useBuildkit: true
 deploy:
   kustomize:
     paths: ["./manifests/"]

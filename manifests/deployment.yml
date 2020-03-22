@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: playk8s-container
-        image: gcr.io/hitsuji-haneta/playk8s:latest
+        image: gcr.io/hitsuji-haneta/playk8s/main:latest
         ports:
         - containerPort: 8080
         volumeMounts:
