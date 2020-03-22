@@ -18,4 +18,4 @@ spec:
       - name: playk8s-sub-container
         image: gcr.io/hitsuji-haneta/playk8s/sub:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 8081

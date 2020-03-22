@@ -1,12 +1,15 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
 
 	"github.com/gin-gonic/gin"
+	pb "github.com/hitsuji-haneta/playk8s/main/protocol"
+	"google.golang.org/grpc"
 )
 
 func main() {
@@ -36,18 +39,20 @@ func main() {
 	router.GET("/push", func(ctx *gin.Context) {
 		log.Println("main: push")
 
-		url := "http://playk8s-sub-service:8080"
-		resp, err := http.Get(url)
+		conn, err := grpc.Dial("playk8s-sub-service:8081", grpc.WithInsecure())
 		if err != nil {
-			log.Fatal(err)
+			log.Fatal("client connection error:", err)
 		}
-		defer resp.Body.Close()
+		defer conn.Close()
 
-		byteArray, err := ioutil.ReadAll(resp.Body)
+		client := pb.NewGreetingClient(conn)
+		greeter := &pb.Greeter{Name: "tama"}
+		res, err := client.Hello(ctx, greeter)
 		if err != nil {
 			log.Fatal(err)
 		}
-		ctx.String(http.StatusOK, string(byteArray))
+
+		ctx.String(http.StatusOK, fmt.Sprintf("%s, %s!", res.GetGreeting(), res.GetName()))
 	})
 
 	router.POST("/", func(ctx *gin.Context) {
